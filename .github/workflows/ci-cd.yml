@@ -1,0 +1,31 @@
+name: Continuous Integration - Build and Test
+
+# This workflow is triggered on pushes to the main branch
+on:
+  push:
+    branches:
+      - main
+
+# Define a single job named 'build'
+jobs:
+  build:
+    # Use the latest version of Ubuntu to run the job
+    runs-on: ubuntu-latest
+
+    # Define the steps for this job
+    steps:
+    - name: Checkout Code
+      # This action checks out your repository under $GITHUB_WORKSPACE
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 21
+      # This action sets up a Java environment
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21' # Specify the Java version your project uses
+        distribution: 'temurin'
+        cache: 'maven' # Caches Maven dependencies for faster builds
+
+    - name: Build with Maven and Run Tests
+      # The `mvn package` command automatically runs all tests and packages the application
+      run: mvn -B package --file pom.xml
