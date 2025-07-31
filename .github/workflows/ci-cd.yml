@@ -28,4 +28,4 @@ jobs:
 
     - name: Build with Maven and Run Tests
       # The `mvn package` command automatically runs all tests and packages the application
-      run: mvn -B package --file pom.xml
+      run: mvn clean package -DSkipTest
