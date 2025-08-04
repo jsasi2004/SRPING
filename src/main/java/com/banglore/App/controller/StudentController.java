@@ -32,7 +32,7 @@ public class StudentController {
     }
     @GetMapping("/student/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable int id){
-        return ResponseEntity.ok().body(sService.getStudent(id));
+        return ResponseEntity.ok().body(sService.getStudentByRoll(id));
     }
     @GetMapping("/student/count")
     public ResponseEntity<Map<String,Integer>> countStudents(){

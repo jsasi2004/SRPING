@@ -22,8 +22,8 @@ public class StudentService {
         return sRepository.findAll();
     }
 
-    public Student getStudent(int id){
-        return sRepository.findById(id).orElseThrow(()->new EntityNotFound("Entity with id "+id+" not found."));
+    public Student getStudentByRoll(int roll){
+        return sRepository.findById(roll).orElseThrow(()->new EntityNotFound("Entity with roll "+roll+" not found."));
     }
 
     public Student saveStudent(Student student){
@@ -47,5 +47,9 @@ public class StudentService {
         Map<String,Integer> m=new HashMap<>();
         m.put("Count", sRepository.totalStudentCount());
         return m;
+    }
+
+    public void deleteStudentById(int id){
+        sRepository.deleteById(id);
     }
 }
