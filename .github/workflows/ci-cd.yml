@@ -11,6 +11,7 @@ jobs:
   build:
     # Use the latest version of Ubuntu to run the job
     runs-on: ubuntu-latest
+    environment: ENVVV
 
     # Define the steps for this job
     steps:
