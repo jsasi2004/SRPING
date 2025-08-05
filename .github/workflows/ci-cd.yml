@@ -32,5 +32,5 @@ jobs:
       # The `mvn package` command automatically runs all tests and packages the application
       run: |
         mvn clean test package \
-          -Dspring.application.name="${{ secrets.NAME }}" \
+          -Dspring.application.name="${{ vars.NAME }}" \
           -Dserver.port="${{ vars.PORT }}"
