@@ -27,13 +27,10 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
          # Caches Maven dependencies for faster build
-    
-    - name: Setting ENV
-      # The `mvn package` command automatically runs all tests and packages the application
-      run: |
-        echo $PORT
-        echo ${{ vars.PORT }}
 
     - name: Build with Maven and Run Tests
       # The `mvn package` command automatically runs all tests and packages the application
-      run: mvn clean test package -Dspring.application.name="working..."
+      run: |
+        mvn clean test package \
+          -Dspring.application.name="${{ secrets.NAME }}" \
+          -Dserver.port="${{ vars.PORT }}"
