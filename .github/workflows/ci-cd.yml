@@ -31,9 +31,9 @@ jobs:
     - name: Setting ENV
       # The `mvn package` command automatically runs all tests and packages the application
       run: |
-        export NAME=${{ vars.NAME }}
-        export PORT=${{ vars.PORT }}
+        echo $PORT
+        echo ${{ vars.PORT }}
 
     - name: Build with Maven and Run Tests
       # The `mvn package` command automatically runs all tests and packages the application
-      run: mvn clean test package
+      run: mvn clean test package -Dspring.application.name="working..."
