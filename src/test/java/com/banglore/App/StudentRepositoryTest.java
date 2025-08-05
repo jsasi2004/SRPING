@@ -13,8 +13,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 // import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -80,5 +83,22 @@ public class StudentRepositoryTest {
         doNothing().when(sRepository).deleteById(anyInt());
         sService.deleteStudentById(3);
         verify(sRepository).deleteById(3);
+    }
+    @Test
+    void testDoAnswer(){
+        doAnswer(invocation->{
+            int msg=invocation.getArgument(0);
+            System.out.println("Mock log: "+msg);
+            return null;
+        }).when(sRepository).deleteById(anyInt());
+        sService.deleteStudentById(0);
+        verify(sRepository).deleteById(0);
+
+    }
+    @Test
+    void testDoThrow(){
+        doThrow(new RuntimeException("Message from exception")).when(sRepository).deleteById(1);
+        assertThrows(RuntimeException.class,()->{sService.deleteStudentById(1);});
+        verify(sRepository).deleteById(1);
     }
 }
